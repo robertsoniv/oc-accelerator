@@ -1,21 +1,12 @@
-import {
-  Card,
-  CardBody,
-  Center,
-  Heading,
-  Icon,
-  Image,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
-import { BuyerProduct } from "ordercloud-javascript-sdk";
-import { FunctionComponent } from "react";
-import { TbPhoto } from "react-icons/tb";
-import { Link as RouterLink } from "react-router-dom";
-import formatPrice from "../../utils/formatPrice";
+import { Card, CardBody, Center, Heading, Icon, Image, Text, VStack } from '@chakra-ui/react'
+import { BuyerProduct } from 'ordercloud-javascript-sdk'
+import { FunctionComponent } from 'react'
+import { TbPhoto } from 'react-icons/tb'
+import { Link as RouterLink } from 'react-router-dom'
+import formatPrice from '@utils/formatPrice'
 
 interface ProductCardProps {
-  product: BuyerProduct;
+  product: BuyerProduct
 }
 
 const ProductCard: FunctionComponent<ProductCardProps> = ({ product }) => {
@@ -24,7 +15,7 @@ const ProductCard: FunctionComponent<ProductCardProps> = ({ product }) => {
       {product && (
         <RouterLink
           to={`/products/${product.ID}`}
-          style={{ textDecoration: "none" }}
+          style={{ textDecoration: 'none' }}
         >
           <Card
             minH="333px"
@@ -35,9 +26,9 @@ const ProductCard: FunctionComponent<ProductCardProps> = ({ product }) => {
             transition="all .15s ease"
             border="1px solid transparent"
             _hover={{
-              shadow: "md",
-              transform: "translateY(-1px)",
-              borderColor: "primary.100",
+              shadow: 'md',
+              transform: 'translateY(-1px)',
+              borderColor: 'primary.100',
             }}
           >
             <CardBody
@@ -57,25 +48,25 @@ const ProductCard: FunctionComponent<ProductCardProps> = ({ product }) => {
                 borderTopRadius="md"
               >
                 {product.xp?.Images &&
-                (product.xp.Images[0]?.ThumbnailUrl ||
-                  product.xp.Images[0]?.Url) ? (
+                (product.xp.Images[0]?.ThumbnailUrl || product.xp.Images[0]?.Url) ? (
                   <Image
                     borderTopRadius="md"
                     boxSize="full"
                     objectFit="cover"
-                    src={
-                      product.xp.Images[0]?.ThumbnailUrl ||
-                      product.xp.Images[0]?.Url
-                    }
+                    src={product.xp.Images[0]?.ThumbnailUrl || product.xp.Images[0]?.Url}
                     zIndex={1}
                     bgColor="white"
                     onError={(e) => {
-                      e.currentTarget.src = ""; // Prevent the broken image from rendering
-                      e.currentTarget.style.display = "none"; // Hide the broken image
+                      e.currentTarget.src = '' // Prevent the broken image from rendering
+                      e.currentTarget.style.display = 'none' // Hide the broken image
                     }}
                   />
                 ) : (
-                  <Icon fontSize="5rem" color="gray.300" as={TbPhoto} />
+                  <Icon
+                    fontSize="5rem"
+                    color="gray.300"
+                    as={TbPhoto}
+                  />
                 )}
                 <Icon
                   fontSize="5rem"
@@ -85,16 +76,25 @@ const ProductCard: FunctionComponent<ProductCardProps> = ({ product }) => {
                 />
               </Center>
 
-              <VStack w="full" minH={"120px"} alignItems="flex-start" p={6}>
-                <Text fontSize="xs" color="chakra-subtle-text">
+              <VStack
+                w="full"
+                minH={'120px'}
+                alignItems="flex-start"
+                p={6}
+              >
+                <Text
+                  fontSize="xs"
+                  color="chakra-subtle-text"
+                >
                   {product.ID}
                 </Text>
                 <Heading size="lg">{product.Name}</Heading>
                 {product.PriceSchedule?.PriceBreaks && (
-                  <Text fontSize="md" fontWeight="normal">
-                    {formatPrice(
-                      product?.PriceSchedule?.PriceBreaks[0].Price ?? 0
-                    )}
+                  <Text
+                    fontSize="md"
+                    fontWeight="normal"
+                  >
+                    {formatPrice(product?.PriceSchedule?.PriceBreaks[0].Price ?? 0)}
                   </Text>
                 )}
               </VStack>
@@ -103,7 +103,7 @@ const ProductCard: FunctionComponent<ProductCardProps> = ({ product }) => {
         </RouterLink>
       )}
     </>
-  );
-};
+  )
+}
 
-export default ProductCard;
+export default ProductCard

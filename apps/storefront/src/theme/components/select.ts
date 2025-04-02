@@ -1,13 +1,14 @@
-import { selectAnatomy } from "@chakra-ui/anatomy";
-import { createMultiStyleConfigHelpers } from "@chakra-ui/react";
+import { selectAnatomy } from '@chakra-ui/anatomy'
+import { createMultiStyleConfigHelpers } from '@chakra-ui/react'
 
-const { definePartsStyle, defineMultiStyleConfig } =
-  createMultiStyleConfigHelpers(selectAnatomy.keys);
+const { definePartsStyle, defineMultiStyleConfig } = createMultiStyleConfigHelpers(
+  selectAnatomy.keys
+)
 
 const baseStyle = definePartsStyle({
   field: {
-    rounded: "none",
+    rounded: 'none',
   },
-});
+})
 
-export const Select = defineMultiStyleConfig({ baseStyle });
+export const Select = defineMultiStyleConfig({ baseStyle })

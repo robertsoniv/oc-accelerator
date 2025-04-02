@@ -1,5 +1,5 @@
 import { IconProps, Image, ImageProps, Link, chakra, createIcon } from '@chakra-ui/react'
-import { THEME_LOGO_URL } from '../../../constants/constants'
+import { THEME_LOGO_URL } from '@constants'
 
 type HeaderLogoProps = IconProps & ImageProps
 

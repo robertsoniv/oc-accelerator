@@ -1,15 +1,15 @@
-import { extendTheme } from "@chakra-ui/react";
-import sitecoreTheme from "@sitecore/blok-theme";
-import components from "./components/index";
-import foundations from "./foundations/index";
-import layerStyles from "./layer-styles";
-import semanticTokens from "./semantic-tokens";
-import styles from "./styles";
+import { extendTheme } from '@chakra-ui/react'
+import sitecoreTheme from '@sitecore/blok-theme'
+import components from './components/index'
+import foundations from './foundations/index'
+import layerStyles from './layer-styles'
+import semanticTokens from './semantic-tokens'
+import styles from './styles'
 
 const acceleratorTheme = extendTheme(
   {
     config: {
-      initialColorMode: "light",
+      initialColorMode: 'light',
       // initialColorMode: "system",
       // useSystemColorMode: true,
     },
@@ -20,6 +20,6 @@ const acceleratorTheme = extendTheme(
     semanticTokens,
   },
   sitecoreTheme
-);
+)
 
-export default acceleratorTheme;
+export default acceleratorTheme

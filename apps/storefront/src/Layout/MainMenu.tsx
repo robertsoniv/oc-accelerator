@@ -1,4 +1,5 @@
-import { ChevronDownIcon } from "@chakra-ui/icons";
+import { DEFAULT_BRAND } from '@/assets/DEFAULT_BRAND'
+import { ChevronDownIcon } from '@chakra-ui/icons'
 import {
   Box,
   Button,
@@ -14,66 +15,52 @@ import {
   Text,
   useDisclosure,
   UseDisclosureProps,
-} from "@chakra-ui/react";
-import {
-  useOcResourceList,
-  useOrderCloudContext,
-  useShopper,
-} from "@ordercloud/react-sdk";
-import { Catalog, Category } from "ordercloud-javascript-sdk";
-import { FC, useEffect, useMemo, useState } from "react";
-import { TbShoppingCartFilled } from "react-icons/tb";
-import { Link as RouterLink } from "react-router-dom";
-import { DEFAULT_BRAND } from "../assets/DEFAULT_BRAND";
-import { BRAND_LOGO_DARK, BRAND_LOGO_LIGHT } from "../constants";
-import { useCurrentUser } from "../hooks/currentUser";
-import MegaMenu from "../Layout/MegaMenu";
+} from '@chakra-ui/react'
+import { BRAND_LOGO_DARK, BRAND_LOGO_LIGHT } from '@constants/brand.constants'
+import { useCurrentUser } from '@hooks/useCurrentUser'
+import { useOcResourceList, useOrderCloudContext, useShopper } from '@ordercloud/react-sdk'
+import { Catalog, Category } from 'ordercloud-javascript-sdk'
+import { FC, useEffect, useMemo, useState } from 'react'
+import { TbShoppingCartFilled } from 'react-icons/tb'
+import { Link as RouterLink } from 'react-router-dom'
+import MegaMenu from './MegaMenu'
 
 interface MainMenuProps {
-  loginDisclosure: UseDisclosureProps;
+  loginDisclosure: UseDisclosureProps
 }
 
 const MainMenu: FC<MainMenuProps> = ({ loginDisclosure }) => {
-  const { data: user } = useCurrentUser();
-  const { isLoggedIn, logout } = useOrderCloudContext();
-  const megaMenuDisclosure = useDisclosure();
-  const [selectedCatalog, setSelectedCatalog] = useState<string>("");
+  const { data: user } = useCurrentUser()
+  const { isLoggedIn, logout } = useOrderCloudContext()
+  const megaMenuDisclosure = useDisclosure()
+  const [selectedCatalog, setSelectedCatalog] = useState<string>('')
 
-  const { orderWorksheet } = useShopper();
+  const { orderWorksheet } = useShopper()
 
-  const { data: catalogData } = useOcResourceList<Catalog>(
-    "Me.Catalogs",
-    undefined,
-    undefined,
-    { staleTime: 300000 }
-  );
+  const { data: catalogData } = useOcResourceList<Catalog>('Me.Catalogs', undefined, undefined, {
+    staleTime: 300000,
+  })
 
-  const catalogs = useMemo(() => catalogData?.Items ?? [], [catalogData]);
+  const catalogs = useMemo(() => catalogData?.Items ?? [], [catalogData])
 
-  const activeCatalogId = catalogs.length > 0 ? catalogs[0]?.ID : undefined;
+  const activeCatalogId = catalogs.length > 0 ? catalogs[0]?.ID : undefined
 
   const { data: categoryData } = useOcResourceList<Category>(
-    "Me.Categories",
+    'Me.Categories',
     activeCatalogId ? { catalogId: activeCatalogId } : undefined,
     undefined,
     { staleTime: 300000 }
-  );
+  )
 
-  const categories = useMemo(() => categoryData?.Items ?? [], [categoryData]);
+  const categories = useMemo(() => categoryData?.Items ?? [], [categoryData])
 
   useEffect(() => {
-    if (!selectedCatalog && catalogs?.length)
-      setSelectedCatalog(catalogs[0].ID);
-  }, [catalogs, selectedCatalog]);
+    if (!selectedCatalog && catalogs?.length) setSelectedCatalog(catalogs[0].ID)
+  }, [catalogs, selectedCatalog])
 
   const totalQuantity = useMemo(() => {
-    return (
-      orderWorksheet?.LineItems?.reduce(
-        (sum, item) => sum + item.Quantity,
-        0
-      ) || 0
-    );
-  }, [orderWorksheet?.LineItems]);
+    return orderWorksheet?.LineItems?.reduce((sum, item) => sum + item.Quantity, 0) || 0
+  }, [orderWorksheet?.LineItems])
 
   const renderCatalogMenu = () => {
     if (catalogs?.length && catalogs.length > 1) {
@@ -98,11 +85,11 @@ const MainMenu: FC<MainMenuProps> = ({ loginDisclosure }) => {
                 >
                   {catalog.Name}
                 </MenuItem>
-              );
+              )
             })}
           </MenuList>
         </Menu>
-      );
+      )
     } else if (catalogs?.length === 1) {
       return (
         <Button
@@ -112,10 +99,10 @@ const MainMenu: FC<MainMenuProps> = ({ loginDisclosure }) => {
         >
           Shop All Products
         </Button>
-      );
+      )
     }
-    return null;
-  };
+    return null
+  }
 
   return (
     <HStack
@@ -133,18 +120,37 @@ const MainMenu: FC<MainMenuProps> = ({ loginDisclosure }) => {
       backdropBlur="5px"
       py={2}
     >
-      <Container h="100%" maxW="full">
-        <HStack h="100%" justify="flex-start" alignItems="center">
+      <Container
+        h="100%"
+        maxW="full"
+      >
+        <HStack
+          h="100%"
+          justify="flex-start"
+          alignItems="center"
+        >
           <RouterLink to="/">
             {BRAND_LOGO_LIGHT ? (
-              <Image src={BRAND_LOGO_LIGHT} alt="WildSite Logo" h="10" />
+              <Image
+                src={BRAND_LOGO_LIGHT}
+                alt="WildSite Logo"
+                h="10"
+              />
             ) : BRAND_LOGO_DARK ? (
-              <Image src={BRAND_LOGO_DARK} alt="WildSite Logo (Dark)" h="10" />
+              <Image
+                src={BRAND_LOGO_DARK}
+                alt="WildSite Logo (Dark)"
+                h="10"
+              />
             ) : (
               <DEFAULT_BRAND h="10" />
             )}
           </RouterLink>
-          <HStack as="nav" flexGrow="1" ml={3}>
+          <HStack
+            as="nav"
+            flexGrow="1"
+            ml={3}
+          >
             {categories.length > 0 && (
               <Button
                 isActive={megaMenuDisclosure.isOpen}
@@ -159,9 +165,7 @@ const MainMenu: FC<MainMenuProps> = ({ loginDisclosure }) => {
           </HStack>
           <HStack>
             {isLoggedIn && (
-              <Heading size="sm">
-                {`Welcome, ${user?.FirstName} ${user?.LastName}`}
-              </Heading>
+              <Heading size="sm">{`Welcome, ${user?.FirstName} ${user?.LastName}`}</Heading>
             )}
             <Button
               as={RouterLink}
@@ -170,7 +174,12 @@ const MainMenu: FC<MainMenuProps> = ({ loginDisclosure }) => {
               size="sm"
               leftIcon={
                 totalQuantity !== 0 ? (
-                  <Box position="relative" mt="2px" mr="2px" lineHeight="1">
+                  <Box
+                    position="relative"
+                    mt="2px"
+                    mr="2px"
+                    lineHeight="1"
+                  >
                     <Box
                       id="cartCountFrame"
                       top="5px"
@@ -205,11 +214,17 @@ const MainMenu: FC<MainMenuProps> = ({ loginDisclosure }) => {
               Cart
             </Button>
             {isLoggedIn ? (
-              <Button size="sm" onClick={logout}>
+              <Button
+                size="sm"
+                onClick={logout}
+              >
                 Logout
               </Button>
             ) : (
-              <Button size="sm" onClick={loginDisclosure.onOpen}>
+              <Button
+                size="sm"
+                onClick={loginDisclosure.onOpen}
+              >
                 Login
               </Button>
             )}
@@ -225,7 +240,7 @@ const MainMenu: FC<MainMenuProps> = ({ loginDisclosure }) => {
         )}
       </Container>
     </HStack>
-  );
-};
+  )
+}
 
-export default MainMenu;
+export default MainMenu

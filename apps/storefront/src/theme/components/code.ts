@@ -1,17 +1,17 @@
-import {defineStyle, defineStyleConfig} from "@chakra-ui/styled-system"
+import { defineStyle, defineStyleConfig } from '@chakra-ui/styled-system'
 
 const baseStyle = defineStyle({
-  px: "0.6em",
-  borderRadius: "md",
-  mx: ".75ch"
+  px: '0.6em',
+  borderRadius: 'md',
+  mx: '.75ch',
 })
 
 const codeTheme = defineStyleConfig({
-  baseStyle
+  baseStyle,
 })
 
 const Code = {
-  ...codeTheme
+  ...codeTheme,
 }
 
 export default Code

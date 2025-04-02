@@ -23,4 +23,4 @@ const acceleratorAdminTheme = extendTheme({
   ...foundations,
 })
 
-export default acceleratorAdminTheme
+export default acceleratorAdminTheme;

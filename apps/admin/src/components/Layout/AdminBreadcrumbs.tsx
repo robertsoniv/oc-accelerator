@@ -2,8 +2,8 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react'
 import Case from 'case'
 import { useMemo } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
-import useBreadcrumbItems from '../../hooks/useBreadcrumbItems'
-import { renderResourceDisplayName } from '../ResourceDetail/ResourceDetail'
+import useBreadcrumbItems from '@hooks/useBreadcrumbItems'
+import { renderResourceDisplayName } from '../resource-detail/ResourceDetail'
 
 const AdminBreadcrumbs = () => {
   const params = useParams()

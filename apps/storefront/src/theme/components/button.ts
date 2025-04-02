@@ -1,7 +1,7 @@
-import { defineStyle, defineStyleConfig } from "@chakra-ui/styled-system"
+import { defineStyle, defineStyleConfig } from '@chakra-ui/styled-system'
 
 const baseStyle = defineStyle({
-  rounded: "none",
+  rounded: 'none',
 })
 
 const buttonTheme = defineStyleConfig({
@@ -9,7 +9,7 @@ const buttonTheme = defineStyleConfig({
 })
 
 const Button = {
-  ...buttonTheme
+  ...buttonTheme,
 }
 
 export default Button

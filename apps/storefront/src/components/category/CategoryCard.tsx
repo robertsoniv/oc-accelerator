@@ -1,30 +1,24 @@
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  Heading,
-  Text,
-  VStack
-} from "@chakra-ui/react";
-import { Category } from "ordercloud-javascript-sdk";
-import { FunctionComponent } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Card, CardBody, CardFooter, Heading, Text, VStack } from '@chakra-ui/react'
+import { Category } from 'ordercloud-javascript-sdk'
+import { FunctionComponent } from 'react'
+import { Link as RouterLink } from 'react-router-dom'
 
 interface CategoryCardProps {
-  category: Category;
-  catalogId?: string;
+  category: Category
+  catalogId?: string
 }
 
-const CategoryCard: FunctionComponent<CategoryCardProps> = ({
-  category,
-  catalogId,
-}) => {
+const CategoryCard: FunctionComponent<CategoryCardProps> = ({ category, catalogId }) => {
   return (
     <>
       {category && (
         <RouterLink
-          to={category.ChildCount ? `/shop/${catalogId}/categories/${category.ID}` : `/shop/${catalogId}/categories/${category.ID}/products`}
-          style={{ textDecoration: "none" }}
+          to={
+            category.ChildCount
+              ? `/shop/${catalogId}/categories/${category.ID}`
+              : `/shop/${catalogId}/categories/${category.ID}/products`
+          }
+          style={{ textDecoration: 'none' }}
         >
           <Card
             minH="133px"
@@ -35,9 +29,9 @@ const CategoryCard: FunctionComponent<CategoryCardProps> = ({
             transition="all .15s ease"
             border="1px solid transparent"
             _hover={{
-              shadow: "md",
-              transform: "translateY(-1px)",
-              borderColor: "primary.100",
+              shadow: 'md',
+              transform: 'translateY(-1px)',
+              borderColor: 'primary.100',
             }}
           >
             <CardBody
@@ -46,8 +40,15 @@ const CategoryCard: FunctionComponent<CategoryCardProps> = ({
               alignItems="flex-start"
               justifyContent="flex-end"
             >
-              <VStack alignItems="flex-start" gap={0}>
-                <Heading size="lg" fontWeight="medium" lineHeight="1.1">
+              <VStack
+                alignItems="flex-start"
+                gap={0}
+              >
+                <Heading
+                  size="lg"
+                  fontWeight="medium"
+                  lineHeight="1.1"
+                >
                   {category.Name}
                 </Heading>
                 {/* TODO: would be cool to get the product list length here but not necessary */}
@@ -65,7 +66,10 @@ const CategoryCard: FunctionComponent<CategoryCardProps> = ({
                 alignItems="center"
                 justifyContent="flex-end"
               >
-                <Text fontWeight="normal" fontSize="sm">
+                <Text
+                  fontWeight="normal"
+                  fontSize="sm"
+                >
                   {category.xp.Description}
                 </Text>
               </CardFooter>
@@ -74,7 +78,7 @@ const CategoryCard: FunctionComponent<CategoryCardProps> = ({
         </RouterLink>
       )}
     </>
-  );
-};
+  )
+}
 
-export default CategoryCard;
+export default CategoryCard

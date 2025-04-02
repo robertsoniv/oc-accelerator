@@ -1,9 +1,9 @@
 const Badge = {
   baseStyle: {
-    size: "sm",
-    fontSize: "sm",
-    borderradius: "sm"
-  }
+    size: 'sm',
+    fontSize: 'sm',
+    borderradius: 'sm',
+  },
   // defaultProps: {
   // },
 }

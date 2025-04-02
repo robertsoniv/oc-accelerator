@@ -1,19 +1,19 @@
 export default function productTypesLabel(productype: string): string {
-  let result: string;
+  let result: string
 
   switch (productype) {
     case 'ad':
-      result = ' per assembled ad';
-      break;
+      result = ' per assembled ad'
+      break
     case 'postcard':
-      result = ' per recipient mailed';
-      break;
+      result = ' per recipient mailed'
+      break
     case 'letter':
-      result = ' per recipient mailed';
-      break;
+      result = ' per recipient mailed'
+      break
     default:
-      result = ' per recipient mailed';
+      result = ' per recipient mailed'
   }
 
-  return result;
+  return result
 }

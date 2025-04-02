@@ -1,29 +1,19 @@
-import {
-  Button,
-  Center,
-  Flex,
-  HStack,
-  Icon,
-  Image,
-  VStack,
-} from "@chakra-ui/react";
-import { useState } from "react";
-import { TbPhoto } from "react-icons/tb";
+import { Button, Center, Flex, HStack, Icon, Image, VStack } from '@chakra-ui/react'
+import { useState } from 'react'
+import { TbPhoto } from 'react-icons/tb'
 
 type ProductImage = {
-  ThumbnailUrl?: string;
-  Url: string;
-};
-
-interface ProductImageGalleryProps {
-  images: ProductImage[];
+  ThumbnailUrl?: string
+  Url: string
 }
 
-const ProductImageGallery: React.FC<ProductImageGalleryProps> = ({
-  images,
-}) => {
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [error, setError] = useState(false);
+interface ProductImageGalleryProps {
+  images: ProductImage[]
+}
+
+const ProductImageGallery: React.FC<ProductImageGalleryProps> = ({ images }) => {
+  const [selectedIndex, setSelectedIndex] = useState(0)
+  const [error, setError] = useState(false)
 
   if (!images.length || error) {
     return (
@@ -33,9 +23,13 @@ const ProductImageGallery: React.FC<ProductImageGalleryProps> = ({
         boxSize="100%"
         maxH="50vh"
       >
-        <Icon fontSize="5rem" color="gray.300" as={TbPhoto} />
+        <Icon
+          fontSize="5rem"
+          color="gray.300"
+          as={TbPhoto}
+        />
       </Center>
-    );
+    )
   }
 
   return (
@@ -62,14 +56,14 @@ const ProductImageGallery: React.FC<ProductImageGalleryProps> = ({
               boxSize="full"
               variant="unstyled"
               onClick={() => {
-                setSelectedIndex(idx);
-                setError(false);
+                setSelectedIndex(idx)
+                setError(false)
               }}
-              _hover={{ transform: "scale(1.025)" }}
+              _hover={{ transform: 'scale(1.025)' }}
               transition="transform 0.2s ease"
               isActive={idx === selectedIndex}
               border="3px solid transparent"
-              _active={{ borderColor: "primary" }}
+              _active={{ borderColor: 'primary' }}
             >
               <Image
                 boxSize="60px"
@@ -95,7 +89,7 @@ const ProductImageGallery: React.FC<ProductImageGalleryProps> = ({
         />
       </Flex>
     </HStack>
-  );
-};
+  )
+}
 
-export default ProductImageGallery;
+export default ProductImageGallery

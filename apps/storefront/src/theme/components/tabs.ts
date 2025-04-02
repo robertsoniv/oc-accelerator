@@ -1,7 +1,7 @@
 const Tabs = {
   defaultProps: {
-    colorScheme: "primary"
-  }
+    colorScheme: 'primary',
+  },
 }
 
 export default Tabs

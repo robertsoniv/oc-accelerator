@@ -1,10 +1,9 @@
 import { ChakraProvider, extendTheme, localStorageManager } from '@chakra-ui/react'
-import { appSettings } from '../../../config/appSettings'
-import useLocalStorage from '../../../hooks/useLocalStorage'
+import { appSettings } from '@config/appSettings'
+import useLocalStorage from '@hooks/useLocalStorage'
 import React, { useMemo } from 'react'
 import tinycolor from 'tinycolor2'
-import acceleratorAdminTheme from '../../../theme/theme'
-// import {buildFontHref} from "../utils/font.utils"
+import acceleratorAdminTheme from '@theme/theme'
 
 interface ChakraProps {
   children: React.ReactNode

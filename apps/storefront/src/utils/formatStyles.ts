@@ -8,10 +8,10 @@ export function buildStylesObj(styles: string) {
       .reduce((stylesObj: any, current) => {
         // build up styles object from constituent part
         if (current.includes('=')) {
-          const [key, val] = current.split('=');
-          stylesObj[key] = val;
+          const [key, val] = current.split('=')
+          stylesObj[key] = val
         }
-        return stylesObj;
+        return stylesObj
       }, {})
-  );
+  )
 }

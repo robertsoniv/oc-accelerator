@@ -16,121 +16,108 @@ import {
   Spinner,
   VStack,
   useDisclosure,
-} from "@chakra-ui/react";
-import { BuyerProduct } from "ordercloud-javascript-sdk";
-import { parse } from "querystring";
-import React, { FunctionComponent, useCallback, useMemo } from "react";
-import {
-  useLocation,
-  useNavigate,
-  useParams,
-  useSearchParams,
-} from "react-router-dom";
-import Pagination from "../shared/pagination/Pagination";
-import FilterSearchMenu, {
-  ServiceListOptions,
-} from "../shared/search/SearchMenu";
-import FacetList from "./facets/FacetList";
-import ProductCard from "./ProductCard";
-import { useOcResourceListWithFacets } from "@ordercloud/react-sdk";
+} from '@chakra-ui/react'
+import { BuyerProduct } from 'ordercloud-javascript-sdk'
+import { parse } from 'querystring'
+import React, { FunctionComponent, useCallback, useMemo } from 'react'
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import Pagination from '@shared/pagination/Pagination'
+import FilterSearchMenu, { ServiceListOptions } from '@shared/search/SearchMenu'
+import FacetList from './product-facets/ProductFacetList'
+import ProductCard from './ProductCard'
+import { useOcResourceListWithFacets } from '@ordercloud/react-sdk'
 
 export interface ProductListProps {
-  renderItem?: (product: BuyerProduct) => JSX.Element;
+  renderItem?: (product: BuyerProduct) => JSX.Element
 }
 
 const ProductList: FunctionComponent<ProductListProps> = ({ renderItem }) => {
   const { catalogId, categoryId } = useParams<{
-    catalogId: string;
-    categoryId: string;
-  }>();
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+    catalogId: string
+    categoryId: string
+  }>()
+  const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
+  const location = useLocation()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   const searchTerm = useMemo(() => {
-    return searchParams.get("search") || undefined;
-  }, [searchParams]);
+    return searchParams.get('search') || undefined
+  }, [searchParams])
 
   const currentPage = useMemo(() => {
-    return Number(searchParams.get("page")) || 1;
-  }, [searchParams]);
+    return Number(searchParams.get('page')) || 1
+  }, [searchParams])
 
   const filters = useMemo(() => {
-    const filtersObj = {} as { [key: string]: string | string[] };
+    const filtersObj = {} as { [key: string]: string | string[] }
     for (const key of searchParams.keys()) {
-      if (!["search", "page", "pageSize"].includes(key)) {
-        filtersObj[key] = searchParams.getAll(key);
+      if (!['search', 'page', 'pageSize'].includes(key)) {
+        filtersObj[key] = searchParams.getAll(key)
       }
-      searchParams.getAll(key);
+      searchParams.getAll(key)
     }
-    return filtersObj;
-  }, [searchParams]);
+    return filtersObj
+  }, [searchParams])
 
-  const { data, isLoading } = useOcResourceListWithFacets<BuyerProduct>(
-    "Me.Products",
-    {
-      search: searchTerm,
-      page: currentPage.toString(),
-      catalogId,
-      categoryId,
-      ...filters,
-    }
-  );
+  const { data, isLoading } = useOcResourceListWithFacets<BuyerProduct>('Me.Products', {
+    search: searchTerm,
+    page: currentPage.toString(),
+    catalogId,
+    categoryId,
+    ...filters,
+  })
 
   const handleRoutingChange = useCallback(
     (queryKey: string, resetPage?: boolean, index?: number) =>
       (value?: string | boolean | number) => {
-        const searchParams = new URLSearchParams(location.search);
-        const hasPageParam = Boolean(searchParams.get("page"));
-        const isFilterParam = !["search", "page", "pageSize"].includes(
-          queryKey
-        );
+        const searchParams = new URLSearchParams(location.search)
+        const hasPageParam = Boolean(searchParams.get('page'))
+        const isFilterParam = !['search', 'page', 'pageSize'].includes(queryKey)
 
         // filters can have multiple values for one key i.e. SpecCount > 0 AND SpecCount < 2
-        const prevValue = isFilterParam
-          ? searchParams.getAll(queryKey)
-          : searchParams.get(queryKey);
-        if (!value && !prevValue) return;
+        const prevValue = isFilterParam ? searchParams.getAll(queryKey) : searchParams.get(queryKey)
+        if (!value && !prevValue) return
         if (value) {
           if (!isFilterParam && prevValue !== value) {
-            searchParams.set(queryKey, value.toString());
+            searchParams.set(queryKey, value.toString())
           } else if (isFilterParam) {
             prevValue?.includes(value.toString())
               ? searchParams.delete(queryKey, value.toString())
-              : searchParams.append(queryKey, value.toString());
+              : searchParams.append(queryKey, value.toString())
           }
-          if (hasPageParam && resetPage) searchParams.delete("page"); // reset page on filter change
+          if (hasPageParam && resetPage) searchParams.delete('page') // reset page on filter change
         } else if (prevValue) {
-          searchParams.delete(
-            queryKey,
-            index !== undefined ? prevValue[index] : undefined
-          );
+          searchParams.delete(queryKey, index !== undefined ? prevValue[index] : undefined)
         }
 
         navigate(
           { pathname: location.pathname, search: searchParams.toString() },
           { state: { shallow: true } }
-        );
+        )
       },
     [location.pathname, location.search, navigate]
-  );
+  )
 
   const listOptions = useMemo(() => {
-    return parse(location.search.slice(1)) as ServiceListOptions;
-  }, [location.search]);
+    return parse(location.search.slice(1)) as ServiceListOptions
+  }, [location.search])
 
   if (isLoading) {
     return (
       <Center h="50vh">
         <Spinner size="xl" />
       </Center>
-    );
+    )
   }
 
   return (
     <>
-      <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
+      <Drawer
+        placement="left"
+        onClose={onClose}
+        isOpen={isOpen}
+      >
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
@@ -149,7 +136,7 @@ const ProductList: FunctionComponent<ProductListProps> = ({ renderItem }) => {
       </Drawer>
 
       <Grid
-        gridTemplateColumns={{ md: "300px 1fr" }}
+        gridTemplateColumns={{ md: '300px 1fr' }}
         gap="4"
         alignItems="flex-start"
       >
@@ -157,9 +144,12 @@ const ProductList: FunctionComponent<ProductListProps> = ({ renderItem }) => {
           as={GridItem}
           position="sticky"
           top="20"
-          display={{ base: "none", md: "block" }}
+          display={{ base: 'none', md: 'block' }}
         >
-          <CardBody as={VStack} alignItems="stretch">
+          <CardBody
+            as={VStack}
+            alignItems="stretch"
+          >
             <FilterSearchMenu
               listOptions={listOptions}
               handleRoutingChange={handleRoutingChange}
@@ -170,8 +160,13 @@ const ProductList: FunctionComponent<ProductListProps> = ({ renderItem }) => {
             />
           </CardBody>
         </Card>
-        <GridItem display={{ base: "block", md: "none" }}>
-          <Button aria-label="Open Filters" onClick={onOpen} mb={4} size="sm">
+        <GridItem display={{ base: 'block', md: 'none' }}>
+          <Button
+            aria-label="Open Filters"
+            onClick={onOpen}
+            mb={4}
+            size="sm"
+          >
             Refine your search
           </Button>
         </GridItem>
@@ -189,7 +184,10 @@ const ProductList: FunctionComponent<ProductListProps> = ({ renderItem }) => {
         </SimpleGrid>
         {data?.Items?.length === 0 && (
           <Center h="20vh">
-            <Heading as="h2" size="md">
+            <Heading
+              as="h2"
+              size="md"
+            >
               No products found
             </Heading>
           </Center>
@@ -201,12 +199,12 @@ const ProductList: FunctionComponent<ProductListProps> = ({ renderItem }) => {
           <Pagination
             page={currentPage}
             totalPages={data?.Meta?.TotalPages}
-            onChange={handleRoutingChange("page")}
+            onChange={handleRoutingChange('page')}
           />
         </Center>
       )}
     </>
-  );
-};
+  )
+}
 
-export default ProductList;
+export default ProductList

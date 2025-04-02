@@ -1,16 +1,16 @@
-import { ResponsiveValue } from '@chakra-ui/styled-system';
+import { ResponsiveValue } from '@chakra-ui/styled-system'
 
 export default function formatChakraString(inputstring: string): ResponsiveValue<number> {
   //const range = { inputstring };
   //const styleObjects = inputstring.split(',');
 
-  const baseInt = 1;
-  const smInt = 1;
-  const mdInt = 2;
-  const lgInt = 4;
-  const xlInt = 4;
+  const baseInt = 1
+  const smInt = 1
+  const mdInt = 2
+  const lgInt = 4
+  const xlInt = 4
 
-  console.log(inputstring);
+  console.log(inputstring)
   // for (const currentStyles of styleObjects) {
   //   {
   //     {
@@ -40,8 +40,8 @@ export default function formatChakraString(inputstring: string): ResponsiveValue
   //     baseInt = parseInt({base})
   //   ))}
 
-  const range = { base: baseInt, sm: smInt, md: mdInt, lg: lgInt, xl: xlInt };
-  return range;
+  const range = { base: baseInt, sm: smInt, md: mdInt, lg: lgInt, xl: xlInt }
+  return range
 
   //base: 2
   //sm: 2

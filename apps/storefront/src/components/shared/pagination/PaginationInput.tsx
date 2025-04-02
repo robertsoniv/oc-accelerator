@@ -3,8 +3,8 @@ import {
   NumberIncrementStepper,
   NumberInput,
   NumberInputField,
-  NumberInputStepper
-} from "@chakra-ui/react"
+  NumberInputStepper,
+} from '@chakra-ui/react'
 
 interface PaginationInputProps {
   inputPage: number
@@ -13,7 +13,13 @@ interface PaginationInputProps {
   onPageChange: (page: number) => void
   onInputChange: (page: number) => void
 }
-export function PaginationInput({page, inputPage, totalPages, onPageChange, onInputChange}: PaginationInputProps) {
+export function PaginationInput({
+  page,
+  inputPage,
+  totalPages,
+  onPageChange,
+  onInputChange,
+}: PaginationInputProps) {
   return (
     <NumberInput
       max={totalPages}

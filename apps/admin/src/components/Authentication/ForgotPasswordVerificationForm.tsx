@@ -1,11 +1,11 @@
 import { Button, VStack } from '@chakra-ui/react'
+import { InputControl } from '@components/operation-form/controls'
+import { CLIENT_ID } from '@constants'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { ForgottenCredentials } from 'ordercloud-javascript-sdk'
 import { FC, useMemo } from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
-import { InputControl } from '../OperationForm/Controls'
-import { CLIENT_ID } from '../../constants/constants'
 
 interface IForgotPasswordVerificationForm {
   onSuccess: () => void
@@ -29,13 +29,12 @@ const ForgotPasswordVerificationForm: FC<IForgotPasswordVerificationForm> = ({ o
   const methods = useForm<FormInputs>({ resolver: yupResolver(validationSchema) })
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-
     await ForgottenCredentials.ResetPasswordByVerificationCode(data.verificationCode!, {
       ClientID: CLIENT_ID,
       Username: data.username,
-      Password: data.password
+      Password: data.password,
     })
-    
+
     onSuccess()
   }
 

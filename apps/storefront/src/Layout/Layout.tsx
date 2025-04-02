@@ -1,29 +1,22 @@
-import {
-  Container,
-  HStack,
-  Text,
-  VStack,
-  useDisclosure,
-} from "@chakra-ui/react";
-import { useOrderCloudContext } from "@ordercloud/react-sdk";
-import { FC, useEffect } from "react";
-import { Outlet, useLocation } from "react-router-dom";
-import MainMenu from "../Layout/MainMenu";
-import LoginModal from "../components/Login/LoginModal";
+import { Container, HStack, Text, VStack, useDisclosure } from '@chakra-ui/react'
+import { useOrderCloudContext } from '@ordercloud/react-sdk'
+import { FC, useEffect } from 'react'
+import { Outlet, useLocation } from 'react-router-dom'
+import MainMenu from './MainMenu'
+import LoginModal from '@components/authentication/LoginModal'
 
 const Layout: FC = () => {
-  const { pathname } = useLocation();
-  const { allowAnonymous, isAuthenticated, isLoggedIn } =
-    useOrderCloudContext();
-  const loginDisclosure = useDisclosure();
+  const { pathname } = useLocation()
+  const { allowAnonymous, isAuthenticated, isLoggedIn } = useOrderCloudContext()
+  const loginDisclosure = useDisclosure()
 
   useEffect(() => {
     if (!allowAnonymous && !isAuthenticated) {
-      loginDisclosure.onOpen();
+      loginDisclosure.onOpen()
     } else if (loginDisclosure.isOpen && isLoggedIn) {
-      loginDisclosure.onClose();
+      loginDisclosure.onClose()
     }
-  }, [loginDisclosure, allowAnonymous, isAuthenticated, isLoggedIn]);
+  }, [loginDisclosure, allowAnonymous, isAuthenticated, isLoggedIn])
 
   return (
     <>
@@ -34,18 +27,16 @@ const Layout: FC = () => {
         w="full"
         minH="100dvh"
         gap={0}
-        sx={{ "&>*": { width: "full" } }}
+        sx={{ '&>*': { width: 'full' } }}
         bgColor="chakra-subtle-bg"
       >
         <Container
           id="outletWrapper"
           display="flex"
           flexFlow="column nowrap"
-          maxW={
-            pathname === "/" || pathname === "/cart" ? "full" : "container.4xl"
-          }
+          maxW={pathname === '/' || pathname === '/cart' ? 'full' : 'container.4xl'}
           mx="auto"
-          my={pathname === "/" || pathname === "/cart" ? 0 : 8}
+          my={pathname === '/' || pathname === '/cart' ? 0 : 8}
           flex="1"
         >
           <Outlet />
@@ -58,13 +49,17 @@ const Layout: FC = () => {
           zIndex="12"
           bg="gray.400"
         >
-          <Text fontWeight="normal" fontSize="sm" color="whiteAlpha.800">
+          <Text
+            fontWeight="normal"
+            fontSize="sm"
+            color="whiteAlpha.800"
+          >
             © Sitcore Inc. 2024
           </Text>
         </HStack>
       </VStack>
     </>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

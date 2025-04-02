@@ -1,11 +1,11 @@
-import { chakra, createIcon } from "@chakra-ui/react";
-import { APP_NAME } from "../constants";
+import { chakra, createIcon } from '@chakra-ui/react'
+import { APP_NAME } from '@constants'
 
 export const DEFAULT_BRAND = createIcon({
-  displayName: "DEFAULT_BRAND",
-  viewBox: "0 0 688.11 114.33",
+  displayName: 'DEFAULT_BRAND',
+  viewBox: '0 0 688.11 114.33',
   defaultProps: {
-    width: "auto",
+    width: 'auto',
     padding: 1.5,
   },
   path: [
@@ -29,8 +29,8 @@ export const DEFAULT_BRAND = createIcon({
       <chakra.text
         ref={(ref) => {
           if (ref) {
-            const textLength = ref.getComputedTextLength();
-            ref.setAttribute("x", `${688.11 - textLength}`);
+            const textLength = ref.getComputedTextLength()
+            ref.setAttribute('x', `${688.11 - textLength}`)
           }
         }}
         y="94%"
@@ -44,4 +44,4 @@ export const DEFAULT_BRAND = createIcon({
       </chakra.text>
     </>,
   ],
-});
+})

@@ -1,10 +1,10 @@
 const Textarea = {
   baseStyle: {
-    maxW: "lg"
+    maxW: 'lg',
   },
   defaultProps: {
-    focusBorderColor: "primary.500"
-  }
+    focusBorderColor: 'primary.500',
+  },
 }
 
 export default Textarea

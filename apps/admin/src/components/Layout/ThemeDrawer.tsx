@@ -15,8 +15,8 @@ import {
   useModalContext,
 } from '@chakra-ui/react'
 import { useContext, useState } from 'react'
-import { brandContext, DEFAULT_THEME_COLORS } from '../Shared/branding/Chakra'
-import { ColorPicker } from '../Shared/branding/ColorPicker'
+import { brandContext, DEFAULT_THEME_COLORS } from '@shared/branding/Chakra'
+import { ColorPicker } from '@shared/branding/ColorPicker'
 
 export const ThemeDrawer = () => {
   const { colors, setColors } = useContext(brandContext)

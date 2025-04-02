@@ -2,30 +2,30 @@ const Table = {
   baseStyle: {
     tr: {
       th: {
-        fontSize: "sm",
-        textTransform: "none",
-        letterSpacing: "normal",
-        fontWeight: "semibold"
+        fontSize: 'sm',
+        textTransform: 'none',
+        letterSpacing: 'normal',
+        fontWeight: 'semibold',
       },
-      "&[href]:hover": {
+      '&[href]:hover': {
         td: {
-          backgroundColor: "blackAlpha.50"
-        }
-      }
-    }
+          backgroundColor: 'blackAlpha.50',
+        },
+      },
+    },
   },
   variants: {
     striped: {
       tr: {
         th: {
-          borderColor: "none"
+          borderColor: 'none',
         },
         td: {
-          borderColor: "none"
-        }
-      }
-    }
-  }
+          borderColor: 'none',
+        },
+      },
+    },
+  },
 }
 
 export default Table

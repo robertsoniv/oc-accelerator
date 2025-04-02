@@ -1,0 +1,9 @@
+[submodule "admin"]
+	path = apps/admin
+	url = https://github.com/ordercloud-api/oc-accelerator.admin.git
+[submodule "storefront"]
+	path = apps/storefront
+	url = https://github.com/ordercloud-api/oc-accelerator.storefront.git
+[submodule "dotnet-functions"]
+	path = apps/dotnet-functions
+	url = https://github.com/ordercloud-api/oc-accelerator.dotnet-functions.git

@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useOrderCloudContext } from "@ordercloud/react-sdk";
 import { FC } from "react";
-import { useCurrentUser } from "../../hooks/currentUser";
+import { useCurrentUser } from "@hooks/useCurrentUser";
 
 const Dashboard: FC = () => {
   const { data: user } = useCurrentUser();

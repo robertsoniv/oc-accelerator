@@ -4,8 +4,8 @@ import { ForgottenCredentials } from 'ordercloud-javascript-sdk'
 import { FC, useMemo } from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
-import { InputControl } from '../OperationForm/Controls'
-import { CLIENT_ID } from '../../constants/constants'
+import { InputControl } from '../operation-form/controls'
+import { CLIENT_ID } from '@constants'
 
 interface ILoginForm {
   onSuccess: () => void

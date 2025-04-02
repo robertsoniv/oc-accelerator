@@ -1,11 +1,11 @@
-import {Button, ButtonGroup} from "@chakra-ui/react"
+import { Button, ButtonGroup } from '@chakra-ui/react'
 
 interface PaginationButtonsProps {
   page: number
   totalPages: number
   onPageChange: (page: number) => void
 }
-export function PaginationButtons({page, totalPages, onPageChange}: PaginationButtonsProps) {
+export function PaginationButtons({ page, totalPages, onPageChange }: PaginationButtonsProps) {
   const buildPagesArray = (count: number) => {
     // ex: count 3 returns [1, 2, 3]
     return Array(count)

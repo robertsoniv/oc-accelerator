@@ -3,12 +3,12 @@ import {
   THEME_COLOR_PRIMARY,
   THEME_COLOR_SECONDARY,
   THEME_LOGO_URL,
-} from '../constants/constants'
+} from '@constants'
 import {
   DEFAULT_THEME_ACCENT,
   DEFAULT_THEME_PRIMARY,
   DEFAULT_THEME_SECONDARY,
-} from '../theme/foundations/colors'
+} from '@theme/foundations/colors'
 
 const getEnvironmentVariable = (
   name: string,
